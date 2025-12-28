@@ -6,14 +6,13 @@ on:
             - master
 
 jobs:
+    test:
+        uses: ./.github/workflows/test.yml  # Call reusable test workflow
+        with:
+            node-version: '20'
+
     deploy:
-        runs-on: ubuntu-latest
-
-        steps:
-            - name: Checkout Code
-              uses: actions/checkout@v3
-
-            - name: Deploy with Wrangler
-              uses: cloudflare/wrangler-action@v3
-              with:
-                apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        needs: test
+        uses: ./.github/workflows/deploy-worker.yml  # Call reusable deploy workflow
+        secrets:
+            CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
