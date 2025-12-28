@@ -1,6 +1,7 @@
 name = "uptime-monitor"
 main = "src/index.js"
 compatibility_date = "2024-06-01"
+account_id = "e1cfbc2bc1866c7525cdea6c160f7a52"
 
 [triggers]
 crons = ["*/10 * * * *"]
