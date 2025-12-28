@@ -9,7 +9,24 @@
  */
 
 export default {
-	async fetch(request, env, ctx) {
-		return new Response('Hello World!');
-	},
+  // This function runs on a schedule (Cron Trigger)
+  async scheduled(event, env, ctx) {
+    const urlToCheck = "https://www.google.com"; // Change to any site you want
+
+    console.log(`Checking status for: ${urlToCheck} ...`);
+
+    const response = await fetch(urlToCheck);
+
+    if (response.status === 200) {
+      console.log("✅ Website is UP!");
+    } else {
+      console.log(`❌ Website is DOWN! Status: ${response.status}`);
+      // In a real job, you would send a Slack/Discord alert here
+    }
+  },
+
+  // This function runs if you visit the worker URL in a browser
+  async fetch(request, env, ctx) {
+    return new Response("This worker runs on a schedule. Check the logs!");
+  },
 };
