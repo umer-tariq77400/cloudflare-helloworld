@@ -18,15 +18,15 @@ export default {
     const response = await fetch(urlToCheck);
 
     if (response.status === 200) {
-      console.log("✅ Website is UP!");
+      console.log("✅ Website is UP! Updated");
     } else {
-      console.log(`❌ Website is DOWN! Status: ${response.status}`);
+      console.log(`❌ Website is DOWN! Status: ${response.status} Updated`);
       // In a real job, you would send a Slack/Discord alert here
     }
   },
 
   // This function runs if you visit the worker URL in a browser
   async fetch(request, env, ctx) {
-    return new Response("This worker runs on a schedule. Check the logs!");
+    return new Response("This worker runs on a schedule. Check the logs! Updated");
   },
 };
